@@ -1,13 +1,15 @@
 CREATE DATABASE knights;
 use knights;
 
-CREATE TABLE favorite_colors (
-  name VARCHAR(20),
-  color VARCHAR(10)
+CREATE TABLE locations (
+  city_name VARCHAR(50),
+  state VARCHAR(50),
+  id SMALLINT(7) UNSIGNED
 );
 
-INSERT INTO favorite_colors
-  (name, color)
+INSERT INTO locations
+  (city_name, state, id)
 VALUES
-  ('Lancelot', 'blue'),
-  ('Galahad', 'yellow');
+  ('Denver', 'Colorado', 1),
+  ('Dallas', 'Texas', 2), 
+  ('New York', 'New York', 3)
