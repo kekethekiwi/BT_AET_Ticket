@@ -1,4 +1,5 @@
 from typing import List, Dict
+from collections import OrderedDict
 from flask import Flask
 import mysql.connector
 import json
@@ -11,7 +12,7 @@ def open_connection():
         'password': 'root',
         'host': 'db',
         'port': '3306',
-        'database': 'knights'
+        'database': 'aet_tickets'
     }
     connection = mysql.connector.connect(**config)
     cursor = connection.cursor()
@@ -21,72 +22,70 @@ def close_connection(cursor, connection):
     cursor.close()
     connection.close()
 
+# Function to get ALL values in a table from our database
+# Pass in either "locations" or "attractions" as the value
+# for our table argument
 
-def locations() -> List[Dict]:
+
+def get_all(table):
     config = {
         'user': 'root',
         'password': 'root',
         'host': 'db',
         'port': '3306',
-        'database': 'knights'
+        'database': 'aet_tickets'
     }
     connection = mysql.connector.connect(**config)
     cursor = connection.cursor()
-    cursor.execute('SELECT * FROM locations') # SQL QUERY (google)
-    results = [{city_name: state} for (city_name, state, id) in cursor]
-    cursor.close()
-    connection.close()
-
-    return results
-
-def get_state(id) -> str:
-    config = {
-        'user': 'root',
-        'password': 'root',
-        'host': 'db',
-        'port': '3306',
-        'database': 'knights'
-    }
-    connection = mysql.connector.connect(**config)
-    cursor = connection.cursor()
-
-    query = "SELECT * FROM locations WHERE id = '{id}'" # SQL QUERY
-    result = dict()
-    for row in cursor:
-        result[id] = row
-
+    cursor.execute(f'SELECT * FROM {table}') # SQL QUERY (google)
+    result = OrderedDict() # use an ordered dict so the order stays the same as we add each row
+    result["num_entries"] = 0  # add this first since to keep spot in OrderedDict
+    for row in cursor: 
+        result[row[0]] = row # add each row of the SQL Database result to our dictionary
+    result["num_entries"] = len(result) - 1 
     cursor.close()
     connection.close()
 
     return result
-   
+
+# function to get data on a specific location or attraction
+# using its location ID or attraction ID
+# @table parameter tells us which table
+# @id parameter corresponds to which feature we are getting
+
+def get_from_id(table, id):
+    config = {
+        'user': 'root',
+        'password': 'root',
+        'host': 'db',
+        'port': '3306',
+        'database': 'aet_tickets'
+    }
+    connection = mysql.connector.connect(**config)
+    cursor = connection.cursor()
+
+    query = f"SELECT * FROM {table} WHERE id = '{id}'" # SQL QUERY
     cursor.execute(query)
-
-    results = [] # create new list
-    for location in cursor: # for loop: through the cursor (list of results)
-        results.append(location[id])
-
-
+    result = dict()
+    for row in cursor:
+        result[id] = row
     cursor.close()
     connection.close()
 
-    if(len(results) > 0):
-        return results[0]
-
-    return 'Oops'
-    
-        
 
 
 @app.route('/')
-def index() -> str:
-    return json.dumps({'places': locations()})
+def get_all_tables() -> str:
+    return json.dumps({'locations': get_all('locations')})
+
+@app.route('/locations')
+def get_locations() -> str:
+    return json.dumps({'locations': get_all('locations')})
 
 
-@app.route('/state/<id>')
-def test(id) -> str:
-    return get_state(id)
-
+@app.route('/location/<id>')
+def get_location(id) -> str:
+    return json.dumps(get_from_id('locations', id))
 
 
 if __name__ == '__main__':
