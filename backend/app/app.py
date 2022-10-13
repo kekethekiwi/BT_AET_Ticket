@@ -71,7 +71,7 @@ def get_from_id(table, id):
         result[id] = row
     cursor.close()
     connection.close()
-
+    return result 
 
 
 @app.route('/')
