@@ -87,6 +87,15 @@ def get_locations() -> str:
 def get_location(id) -> str:
     return json.dumps(get_from_id('locations', id))
 
+@app.route('/attractions')
+def get_attractions() -> str:
+    return json.dumps({'attractions': get_all('attractions')})
+
+
+@app.route('/attractions/<id>')
+def get_attraction(id) -> str:
+    return json.dumps(get_from_id('attractions', id))
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
