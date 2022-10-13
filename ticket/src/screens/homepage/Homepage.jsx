@@ -1,5 +1,6 @@
-import React from 'react'
-import { Navbar } from '../../components'
+import React, { useState } from 'react';
+import PopupWindow from '../../components/popupWindow/PopupWindow'
+import Navbar from '../../components/navbar/Navbar'
 import './Homepage.css'
 import Logo from "../../assets/Logo.svg"
 import main_pic from "../../assets/main_pic.svg"
@@ -11,7 +12,9 @@ const Homepage = () => {
         <Navbar/>
        </div>
        <div class = "row">
-            <button type="button" class="btn btn-danger">START PLANNING RN</button>
+           
+          <PopupWindow/>
+         
           </div>
         <div class = "row">
           <img src={Logo}></img>
@@ -23,5 +26,6 @@ const Homepage = () => {
 
   )
 }
+
 
 export default Homepage
