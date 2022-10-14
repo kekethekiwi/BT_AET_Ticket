@@ -16,11 +16,11 @@ IGNORE 1 LINES
 
 
 CREATE TABLE IF NOT EXISTS aet_tickets.attractions(
-  'name' VARCHAR(50),
+  `name` VARCHAR(50),
   price SMALLINT(7) UNSIGNED,
   age_range SMALLINT(7) UNSIGNED,
   activity_type VARCHAR(50),
-  'address' TEXT(65535), 
+  `address` TEXT(65535), 
   time_spent SMALLINT (7),
   id SMALLINT(7),
   cid SMALLINT(7)

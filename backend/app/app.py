@@ -3,9 +3,11 @@ from collections import OrderedDict
 from flask import Flask
 import mysql.connector
 import json
+from flask_cors import CORS
+
 
 app = Flask(__name__)
-
+CORS((app))
 def open_connection():
     config = {
         'user': 'root',
@@ -92,7 +94,11 @@ def get_attractions() -> str:
     return json.dumps({'attractions': get_all('attractions')})
 
 
-@app.route('/attractions/<id>')
+@app.route('/attractions/bycity/<cid>')
+def get_attractionsfromcity(cid) -> str:
+    return json.dumps(get_from_id('attractions', cid))
+
+ @app.route('/attractions/<id>')
 def get_attraction(id) -> str:
     return json.dumps(get_from_id('attractions', id))
 
