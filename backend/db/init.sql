@@ -14,6 +14,7 @@ LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
 (id,city,country,attraction_id_list);
 
+
 CREATE TABLE IF NOT EXISTS aet_tickets.attractions(
   'name' VARCHAR(50),
   price SMALLINT(7) UNSIGNED,
