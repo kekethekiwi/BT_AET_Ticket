@@ -75,6 +75,25 @@ def get_from_id(table, id):
     connection.close()
     return result 
 
+def get_from_city(table, cid):
+    config = {
+        'user': 'root',
+        'password': 'root',
+        'host': 'db',
+        'port': '3306',
+        'database': 'aet_tickets'
+    }
+    connection = mysql.connector.connect(**config)
+    cursor = connection.cursor()
+
+    query = f"SELECT * FROM {table} WHERE cid = '{cid}'" # SQL QUERY
+    cursor.execute(query)
+    result = dict()
+    for row in cursor:
+        result[id] = row
+    cursor.close()
+    connection.close()
+    return result 
 
 @app.route('/')
 def get_all_tables() -> str:
@@ -96,9 +115,9 @@ def get_attractions() -> str:
 
 @app.route('/attractions/bycity/<cid>')
 def get_attractionsfromcity(cid) -> str:
-    return json.dumps(get_from_id('attractions', cid))
+    return json.dumps(get_from_city('attractions', cid))
 
- @app.route('/attractions/<id>')
+@app.route('/attractions/<id>')
 def get_attraction(id) -> str:
     return json.dumps(get_from_id('attractions', id))
 
