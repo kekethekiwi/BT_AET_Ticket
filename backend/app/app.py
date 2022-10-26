@@ -1,3 +1,4 @@
+import re
 from typing import List, Dict
 from collections import OrderedDict
 from flask import Flask
@@ -8,6 +9,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS((app))
+
 def open_connection():
     config = {
         'user': 'root',
@@ -102,9 +104,53 @@ def get_from_city(table, cid):
     connection.close()
     return result 
 
+def run_query(table, request_params):
+    query = build_query(table, request_params)
+    config = {
+        'user': 'root',
+        'password': 'root',
+        'host': 'db',
+        'port': '3306',
+        'database': 'aet_tickets'
+    }
+    connection = mysql.connector.connect(**config)
+    cursor = connection.cursor()
+
+    cursor.execute(query)
+    result = dict()
+    for row in cursor:
+        result[id] = row
+    cursor.close()
+    connection.close()
+    return result 
+
+
+def build_query(table, request_params) -> str: 
+    # get from front end
+    '''requests = { 
+        "id" : 1,
+        "cid" : 0, 
+        "activity_type" : "Indoor"
+    }
+    # take this line out
+    request_params = requests '''
+    "SELECT * FROM {table} WHERE cid = '{cid}' AND id = '{id}' AND activity_type = 'Outdoor'"
+    query = f"SELECT * FROM {table}"
+    count = 0
+    for key in request_params : 
+        if(count == 0): 
+            query += " WHERE "
+        else :
+            query += " AND "
+        
+        query += str(key) + " = " + '\'' + str(request_params[key]) + '\'' #id = '1'cid = '0'activity_type = 'Outdoor'
+        count += 1
+    return query
+
 @app.route('/')
 def get_all_tables() -> str:
-    return json.dumps({'locations': get_all('locations')})
+    return json.dumps({'locations': run_query('attractions', {})})
+    #return json.dumps({'locations': get_all('locations')})
 
 @app.route('/locations')
 def get_locations() -> str:
