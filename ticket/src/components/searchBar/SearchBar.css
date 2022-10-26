@@ -1,4 +1,9 @@
 .form-control {
-    border-radius: 50px 0  0 50px !important;
-    background-color: #F2DED7 !important;;
+    border-radius: 50px 50px 50px 50px !important;
+    width: 1360px;
+    height: 60px;
+    background-color: #F2DED7 !important;
+    align-content: center;
+    margin-bottom: 50px;
 }
+

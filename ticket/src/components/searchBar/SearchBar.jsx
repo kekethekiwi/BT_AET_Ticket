@@ -17,11 +17,10 @@ const SearchBar = () => {
 
   return (
     <div class="input-group"> 
-      <div class="form-outline"> 
       <input type="search" id="form1" class="form-control" placeholder={message} 
       onChange={event => setMessage(event.target.value)} 
       onKeyDown={handleKeyDown} required /> 
-      </div> 
+ 
       </div>
   )
 }
