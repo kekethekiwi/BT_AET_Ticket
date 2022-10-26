@@ -23,7 +23,9 @@ CREATE TABLE IF NOT EXISTS aet_tickets.attractions(
   `address` TEXT(65535), 
   time_spent SMALLINT (7),
   id SMALLINT(7),
-  cid SMALLINT(7)
+  cid SMALLINT(7),
+  `date` TEXT(65535),
+  time_of_day TEXT(65535)
 );
 
 LOAD DATA LOCAL INFILE '/docker-entrypoint-initdb.d/data_files/attractions.csv'
@@ -32,5 +34,5 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
-(name,price,age_range,activity_type,address, time_spent,id,cid);
+(name,price,age_range,activity_type,address, time_spent,id,cid,date,time_of_day);
 

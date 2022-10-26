@@ -1,7 +1,7 @@
-name,price,age_range,activity_type,address,time_spent,id,cid
-Barton Springs,2-5,2-100+,Outdoor,"Barton Springs Rd, Austin, TX 78704",6,0,0
-Texas State Capitol,0,10-100+,Indoor,"1100 Congress Ave., Austin, TX 78701",4,1,2
-Taj Mahal ,12,2-100+,Outdoor,"Dharmapuri, Forest Colony, Tajganj, Agra, Uttar Pradesh 282001, India",3,2,2
-Agra Fort,7,2-100+,Outdoor,"Agra Fort, Rakabganj, Agra, Uttar Pradesh 202003, India",2,3,0
-The Bund,0-10,1-100+,Outdoor,"Zhongshan Rd (E-1), Waitan, Huangpu, Shanghai, China, 200002",10,4,1
-Jade Buddha Temple,0,8-100+,Indoor,"170 Anyuan Rd, Jing'An, China, 200061",1,5,1
+name,price,age_range,activity_type,address,time_spent,id,cid,date,time_of_day
+Barton Springs,2-5,2-100+,Outdoor,"Barton Springs Rd, Austin, TX 78704",6,0,0,"[M, T, W, TH, F, SA, SU]","[M,A,E,N]"
+Texas State Capitol,0,10-100+,Indoor,"1100 Congress Ave., Austin, TX 78701",4,1,0,"[M, T, W, TH, F]",[A]
+Taj Mahal ,12,2-100+,Outdoor,"Dharmapuri, Forest Colony, Tajganj, Agra, Uttar Pradesh 282001, India",3,2,2,"[SA, SU]","[M,A]"
+Agra Fort,7,2-100+,Outdoor,"Agra Fort, Rakabganj, Agra, Uttar Pradesh 202003, India",2,3,2,"[M, TH, F]","[A,E]"
+The Bund,0-10,1-100+,Outdoor,"Zhongshan Rd (E-1), Waitan, Huangpu, Shanghai, China, 200002",10,4,1,"[T, W]","[M,A,E,N]"
+Jade Buddha Temple,0,8-100+,Indoor,"170 Anyuan Rd, Jing'An, China, 200061",1,5,1,"[M, T, W, TH, F]","[M,A,N]"

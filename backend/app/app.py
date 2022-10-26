@@ -88,9 +88,16 @@ def get_from_city(table, cid):
 
     query = f"SELECT * FROM {table} WHERE cid = '{cid}'" # SQL QUERY
     cursor.execute(query)
+
     result = dict()
-    for row in cursor:
-        result[id] = row
+    counter = 0
+    for row in cursor: # so cursor might be a matrix (list within list)
+        # check each col?
+        result[counter] = row
+        counter+=1
+    
+        # result["counter"] = counter
+        
     cursor.close()
     connection.close()
     return result 
@@ -112,9 +119,9 @@ def get_location(id) -> str:
 def get_attractions() -> str:
     return json.dumps({'attractions': get_all('attractions')})
 
-
 @app.route('/attractions/bycity/<cid>')
-def get_attractionsfromcity(cid) -> str:
+# get attractions from one city id
+def get_attractions_from_city(cid) -> str:
     return json.dumps(get_from_city('attractions', cid))
 
 @app.route('/attractions/<id>')
