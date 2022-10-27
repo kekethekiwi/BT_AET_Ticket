@@ -5,6 +5,7 @@ from flask import Flask
 import mysql.connector
 import json
 from flask_cors import CORS
+# import requests
 # from datetime import datetime
 
 app = Flask(__name__)
@@ -127,14 +128,15 @@ def run_query(table, request_params):
 
 def build_query(table, request_params) -> str: 
     # get from front end
-    '''requests = { 
+    requests = { 
         "id" : 1,
         "cid" : 0, 
+        "age_low" : 10
         "activity_type" : "Indoor"
     }
     # take this line out
-    request_params = requests '''
-    "SELECT * FROM {table} WHERE cid = '{cid}' AND id = '{id}' AND activity_type = 'Outdoor'"
+    request_params = requests 
+    # "SELECT * FROM {table} WHERE cid = '{cid}' AND id = '{id}' AND activity_type = 'Outdoor'"
 
     filters = {
         "price_low",
@@ -147,16 +149,38 @@ def build_query(table, request_params) -> str:
         "time_of_day"
     }
     
+    low_limit_filters = {
+        "price_low",
+        "age_low"
+    }
+
+    high_limit_filters = {
+        "price_high",
+        "age_high"
+    }
+    
 
     query = f"SELECT * FROM {table}"
     count = 0
+    # "SELECT * FROM {table} WHERE cid = '{cid}' AND id = '{id}' AND activity_type = 'Outdoor'"
+
     for key in request_params : 
         if(count == 0): 
             query += " WHERE "
-        else :
-            query += " AND "
+        else:
+            query += " AND " 
+
+        operator = "="
+        quotes = "'"
+        if key in low_limit_filters:
+            query += ">="
+            quotes = ""
+        elif key in high_limit_filters:
+            query += "<=" 
+            quotes = ""
+         
+        query += (f"{key} + {operator} + {quotes} + {request_params[key]} + {quotes}") #id = '1'cid = '0'activity_type = 'Outdoor'
         
-        query += str(key) + " = " + '\'' + str(request_params[key]) + '\'' #id = '1'cid = '0'activity_type = 'Outdoor'
         count += 1
     return query
 
