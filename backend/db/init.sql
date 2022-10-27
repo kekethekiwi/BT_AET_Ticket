@@ -17,8 +17,10 @@ IGNORE 1 LINES
 
 CREATE TABLE IF NOT EXISTS aet_tickets.attractions(
   `name` VARCHAR(50),
-  price SMALLINT(7) UNSIGNED,
-  age_range SMALLINT(7) UNSIGNED,
+  price_low SMALLINT(7) UNSIGNED,
+  price_high SMALLINT(7) UNSIGNED,
+  age_low SMALLINT(7) UNSIGNED,
+  age_high SMALLINT(7) UNSIGNED,
   activity_type VARCHAR(50),
   `address` TEXT(65535), 
   time_spent SMALLINT (7),
@@ -34,5 +36,5 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
-(name,price,age_range,activity_type,address, time_spent,id,cid,date,time_of_day);
+(name,price_low,price_high,age_low,age_high,activity_type,address,time_spent,id,cid,date,time_of_day);
 

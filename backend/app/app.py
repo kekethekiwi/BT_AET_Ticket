@@ -135,6 +135,19 @@ def build_query(table, request_params) -> str:
     # take this line out
     request_params = requests '''
     "SELECT * FROM {table} WHERE cid = '{cid}' AND id = '{id}' AND activity_type = 'Outdoor'"
+
+    filters = {
+        "price_low",
+        "price_high"
+        "age_low",
+        "age_high"
+        "activity_type"
+        "time_spent",
+        "date",
+        "time_of_day"
+    }
+    
+
     query = f"SELECT * FROM {table}"
     count = 0
     for key in request_params : 
