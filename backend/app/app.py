@@ -5,7 +5,7 @@ from flask import Flask
 import mysql.connector
 import json
 from flask_cors import CORS
-# import requests
+import requests
 # from datetime import datetime
 
 app = Flask(__name__)
@@ -106,6 +106,7 @@ def get_from_city(table, cid):
     return result 
 
 def run_query(table, request_params):
+    # query = build_query(table, request_params)
     query = build_query(table, request_params)
     config = {
         'user': 'root',
@@ -119,8 +120,11 @@ def run_query(table, request_params):
 
     cursor.execute(query)
     result = dict()
+    counter = 0
     for row in cursor:
-        result[id] = row
+        result[counter] = row # id used to be in place of counter
+        counter += 1
+
     cursor.close()
     connection.close()
     return result 
@@ -131,19 +135,18 @@ def build_query(table, request_params) -> str:
     requests = { 
         "id" : 1,
         "cid" : 0, 
-        "age_low" : 10
+        "age_low" : 10,
         "activity_type" : "Indoor"
     }
     # take this line out
     request_params = requests 
     # "SELECT * FROM {table} WHERE cid = '{cid}' AND id = '{id}' AND activity_type = 'Outdoor'"
-
     filters = {
         "price_low",
-        "price_high"
+        "price_high",
         "age_low",
-        "age_high"
-        "activity_type"
+        "age_high",
+        "activity_type",
         "time_spent",
         "date",
         "time_of_day"
@@ -158,7 +161,6 @@ def build_query(table, request_params) -> str:
         "price_high",
         "age_high"
     }
-    
 
     query = f"SELECT * FROM {table}"
     count = 0
@@ -186,8 +188,8 @@ def build_query(table, request_params) -> str:
 
 @app.route('/')
 def get_all_tables() -> str:
+    request_params = requests.args.get()
     return json.dumps({'locations': run_query('attractions', {})})
-    #return json.dumps({'locations': get_all('locations')})
 
 @app.route('/locations')
 def get_locations() -> str:
