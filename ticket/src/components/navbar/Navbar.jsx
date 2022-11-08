@@ -9,22 +9,22 @@ const Navbar = () => {
     <div class = "container-fluid">
       <div class = "row">
          <nav class="navbar navbar-expand-lg">
-          <div class = "row">
-            <div class = "col">
+          {/*<div class = "row">*/}
+           {/*<div class = "col me-auto">*/}
               <a class="navbar-brand" href="#">
                 <div class = "row">
-                  <img class = "logo_pic" src= {logo} width = "733px" height="144px"/>
+                  <img class = "logo_pic" src= {logo} width = "300px" height="70px"/>
                 </div>
-                <div class = "row">
+                <div class = "row"> 
                 <blockquote class="blockquote">
                   <p class="logoText">plan first, relax later</p>
                 </blockquote>
-                </div>
+                </div> 
                 
                 </a>
-            </div>
-            <div class = "col me-auto" style={{display: 'flex', justifyContent: 'flex-end'}}>
-                <ul class="navbar-nav" id = "navbarNav" style={{display: 'flex', justifyContent: 'flex-end'}}>
+            {/*</div>*/}
+            {/*<div class = "col ms-auto" style={{display: 'flex', justifyContent: 'flex-end'}}>*/}
+            <ul class="navbar-nav ms-auto" id = "navbarNav" >
                   <li class="nav-item active">
                     <a class="nav-link" href="#">Sign up</a>
                   </li>
@@ -37,10 +37,10 @@ const Navbar = () => {
                 
                 </ul>
              
-            </div>
+           {/* </div> */}
 
             
-          </div>
+         {/* </div>*/}
         
           
 
