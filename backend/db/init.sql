@@ -10,7 +10,7 @@ LOAD DATA LOCAL INFILE '/docker-entrypoint-initdb.d/data_files/locations.csv'
 INTO TABLE aet_tickets.locations
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
-LINES TERMINATED BY '\r\n'
+LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (id,city,country,attraction_id_list);
 
@@ -34,7 +34,7 @@ LOAD DATA LOCAL INFILE '/docker-entrypoint-initdb.d/data_files/attractions.csv'
 INTO TABLE aet_tickets.attractions
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
-LINES TERMINATED BY '\r\n'
+LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (name,price_low,price_high,age_low,age_high,activity_type,address,time_spent,id,cid,date,time_of_day);
 
