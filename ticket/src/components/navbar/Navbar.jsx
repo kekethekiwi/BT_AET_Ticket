@@ -15,11 +15,11 @@ const Navbar = () => {
                 <div class = "row">
                   <img class = "logo_pic" src= {logo} width = "300px" height="70px"/>
                 </div>
-                <div class = "row"> 
+                <div class = "row">
                 <blockquote class="blockquote">
                   <p class="logoText">plan first, relax later</p>
                 </blockquote>
-                </div> 
+                </div>
                 
                 </a>
             {/*</div>*/}
@@ -34,7 +34,7 @@ const Navbar = () => {
                   <li class="nav-item">
                     <a class="nav-link"href="#"><img src= {profile} /></a>
                   </li>
-                
+                 
                 </ul>
              
            {/* </div> */}
