@@ -3,8 +3,8 @@ import React from 'react'
 import { useState } from 'react';
 
 const SearchBar = () => {
-  const [message, setMessage] = useState(' ');
-
+  const [message, setMessage] = useState('Where would you like to go?');
+  
   const handleKeyDown = event => {
 
     if (event.key === 'Enter') {
