@@ -5,7 +5,7 @@ from flask import Flask
 import mysql.connector
 import json
 from flask_cors import CORS
-import requests
+from flask import request
 # from datetime import datetime
 
 app = Flask(__name__)
@@ -104,6 +104,25 @@ def get_from_city(table, cid):
     cursor.close()
     connection.close()
     return result 
+
+def get_attractions_filters():
+    filter_list = [
+        "price_low",
+        "price_high",
+        "age_low",
+        "age_high",
+        "activity_type",
+        "time_spent",
+        "date",
+        "time_of_day"
+    ]
+    filters = {}
+    for f in filter_list:
+        filter = request.args.get(f, "None")
+        if filter != "None":
+            filters[f] = filter
+    return filters
+
 
 def run_query(table, request_params):
     # query = build_query(table, request_params)
