@@ -13,8 +13,9 @@
     margin-top: -5px !important;
 }
 
-h1 {
+.header {
     width: auto;
     margin: auto;
     margin-right: -10px;
+    font-weight:normal;
 }

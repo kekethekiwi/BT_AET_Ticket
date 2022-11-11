@@ -1,12 +1,14 @@
 .navbarNav {
     background-color: #ffffff;
     list-style: none !important;
-    padding-top: -80px !important;
+    margin-top: 10px !important;
 }
 
 .logoText {
-    margin-left: 78px !important;
-    margin-top: -1px !important;
+   padding-top: 40px;
+  /* padding-left: 0px;*/
+  padding-left: 0px;
+  /* margin-left: -10px;*/
 }
 
 .logo_pic {

@@ -16,7 +16,7 @@ const Navbar2 = () => {
                 </div>
                 
               </a>
-              <h1>You are traveling to</h1>
+              <h1 class="header">You are traveling to</h1>
             {/*</div>*/}
             {/*<div class = "col ms-auto" style={{display: 'flex', justifyContent: 'flex-end'}}>*/}
             <ul class="navbar-nav ms-auto" id = "navbarNav" >

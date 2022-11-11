@@ -48,10 +48,6 @@ const Navbar = () => {
     </div>
  
 
-     <div class = "row">
-       <SearchBar/>
-     </div>    
-      
     </div>
     
   )

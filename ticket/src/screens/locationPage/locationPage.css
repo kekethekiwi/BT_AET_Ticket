@@ -4,6 +4,13 @@
 
 
 .loc_background {
-    margin-top: 500px !important;
+    position: absolute;
+    bottom:0;
+}
 
+.location {
+    width: auto;
+    margin: auto;
+    margin-left: 550px;
+   /* margin-right: -10px;*/
 }
