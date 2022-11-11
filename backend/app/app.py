@@ -105,7 +105,8 @@ def get_from_city(table, cid):
     connection.close()
     return result 
 
-def get_attractions_filters():
+def get_attractions_filters(request_params):
+    # return request_params.filters
     filter_list = [
         "price_low",
         "price_high",
@@ -155,7 +156,8 @@ def build_query(table, request_params) -> str:
         "id" : 1,
         "cid" : 0, 
         "age_low" : 10,
-        "activity_type" : "Indoor"
+        "activity_type" : "Indoor",
+        "price_high": 4
     }
     # take this line out
     request_params = requests 
@@ -194,21 +196,22 @@ def build_query(table, request_params) -> str:
         operator = "="
         quotes = "'"
         if key in low_limit_filters:
-            query += ">="
+            operator = ">="
             quotes = ""
         elif key in high_limit_filters:
-            query += "<=" 
+            operator = "<=" 
             quotes = ""
          
-        query += (f"{key} + {operator} + {quotes} + {request_params[key]} + {quotes}") #id = '1'cid = '0'activity_type = 'Outdoor'
+        query += (f"{key} {operator} {quotes}{request_params[key]}{quotes}") #id = '1'cid = '0'activity_type = 'Outdoor'
         
         count += 1
     return query
 
 @app.route('/')
 def get_all_tables() -> str:
-    request_params = requests.args.get()
-    return json.dumps({'locations': run_query('attractions', {})})
+    request_params = request.data
+    get_attractions_filters(request_params)
+    return json.dumps({'attractions': run_query('attractions', {})})
 
 @app.route('/locations')
 def get_locations() -> str:
