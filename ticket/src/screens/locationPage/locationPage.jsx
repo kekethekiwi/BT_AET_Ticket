@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar2 from '../../components/navbar2/navbar2'
 import LocLogo from "../../assets/locationPage-pic.svg"
+import Dropdown from '../../components/dropdown/Dropdown'
 import { useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -24,7 +25,9 @@ const LocationPage = () => {
       <div class = "row">
         <h1 class="location">{location}</h1> 
       </div>
-      
+      <div class = "row">
+       <Dropdown/>
+      </div>
       <div class = "row">
        <img class = "loc_background" src= {LocLogo}/>
       </div>
