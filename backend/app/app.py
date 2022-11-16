@@ -228,7 +228,14 @@ def get_attractions() -> str:
 
 @app.route('/attractions/bycity/<cid>')
 # get attractions from one city id
+### -- MAIN ENTRY POINT
 def get_attractions_from_city(cid) -> str:
+    # 1. Get from id from the locations table -> should output a list of cities that match the ID given (should be one city only--> list of size 1)
+    # 2. Parse the information to extract the Attractions List, and convert the string into a list of numbers
+    # 3. Loop through the list of attractions and build a query with all the Attraction Id's 
+    # 4. Query attractions from attractions table
+    # 5. Filter attractions based on request args
+    # 6. Return attractions
     return json.dumps(get_from_city('attractions', cid))
 
 @app.route('/attractions/<id>')
