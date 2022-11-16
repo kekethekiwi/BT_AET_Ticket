@@ -6,6 +6,7 @@ import mysql.connector
 import json
 from flask_cors import CORS
 from flask import request
+from algorithm import parse_list
 # from datetime import datetime
 
 app = Flask(__name__)
@@ -98,12 +99,12 @@ def get_from_city(table, cid):
         # check each col?
         result[counter] = row
         counter+=1
-    
+
         # result["counter"] = counter
         
     cursor.close()
     connection.close()
-    return result 
+    return result[0]
 
 def get_attractions_filters():
     filter_list = [
@@ -217,6 +218,8 @@ def get_locations() -> str:
 
 @app.route('/location/<id>')
 def get_location(id) -> str:
+    city = get_from_id('locations', id)
+    return city
     return json.dumps(get_from_id('locations', id))
 
 @app.route('/attractions')
