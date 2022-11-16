@@ -1,5 +1,5 @@
 import React from 'react'
-import {Homepage, LocationPage} from './screens'
+import {FormPage, Homepage, LocationPage} from './screens'
 import {Routes, Route} from 'react-router-dom'
 
 const App = () => {
@@ -9,6 +9,7 @@ const App = () => {
               <Routes>
                 <Route path="/">
                   <Route index element= {<Homepage/>}></Route>
+                  <Route path= "formpage" element= {<FormPage/>}></Route>
                   <Route path= "location" element= {<LocationPage/>}></Route>
                 </Route>
               </Routes>
