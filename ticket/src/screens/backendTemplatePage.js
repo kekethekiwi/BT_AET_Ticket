@@ -37,8 +37,19 @@ import {
 function BackendTemplatePage () {
   const [filterQuery, setFilterQuery] = useState(null);
   const [useFilter, setUseFilter] = useState('');
+
   const [id, setCid] = useState('');
-  const [activity_type, setAType] = useState('');
+  const [activityType, setActivityType] = useState('');
+  // build out other filters (listed above) in a similar 
+  // format to activityType
+
+  const [idToggle, setIdToggle] = useState('');
+  const [activityToggle, setActivityToggle] = useState('');
+  // set other toggles (one for each filter) in a similar 
+  // format to activityType
+
+  const [submitted, setSubmitted] = useState(false);
+  
   const [posts, setPosts] = useState([]);
 	const [numPosts, setNumPosts] = useState(0);
 	const [loaded, setLoaded] = useState(false);
@@ -48,7 +59,7 @@ function BackendTemplatePage () {
 		var multiple = false;
 		var add_q = false;
 		var filter_dict = {
-			activity_type : activity_type
+			activity_type : activityType
 		};
 		for (let filter in filter_dict) {
 			if (filter_dict[filter] !== '') {
@@ -66,7 +77,15 @@ function BackendTemplatePage () {
 			setUseFilter(true);
 		}
 		setFilterQuery(query_string);
-	}, [id]);
+	}, [id, activityType]);
+  
+  
+  useEffect(() => {
+    setSubmitted(false);
+    setCid(idToggle);
+    setActivityType(activityToggle);
+	}, [submitted]);
+
 
   useEffect(() => {
 		const fetchPosts = async () => {
@@ -86,7 +105,7 @@ function BackendTemplatePage () {
 				.then((result) => {
 					console.log(
 						'fetched: ' +
-							'http://localhost:5000' +
+							'http://localhost:5000/attractions/bycity/' + id + 
 							filterQuery
 					);
 					var postArr = [];
@@ -107,8 +126,12 @@ function BackendTemplatePage () {
 		}
 	}, [id, filterQuery, useFilter]);
 
-
+  // hardcoded for now
   const city_options = [
+    {
+      value: -1,
+      label: "Select a location",
+    },
     {
       value: 0,
       label: "Austin, Texas, USA",
@@ -121,7 +144,7 @@ function BackendTemplatePage () {
       value: 2,
       label: "Agra, UP, India",
     },
-  ];
+  ]; // TODO: build a entrypoint in your backend to get this data dynamically
   return (
     <Page title="Forms" breadcrumbs={[{ name: 'Forms', active: true }]}>
       <Row>
@@ -162,7 +185,7 @@ function BackendTemplatePage () {
                     type="select" 
                     name="select"
                     onChange={(e) => {
-                      setCid(e.target.value);
+                      setIdToggle(e.target.value);
                       console.log(e.target.value);
                     }}
                     >
@@ -178,12 +201,26 @@ function BackendTemplatePage () {
                   <Col sm={10}>
                     <FormGroup check>
                       <Label check>
-                        <Input type="radio" name="radio2" /> Indoor Activities
+                        <Input 
+                          type="radio" 
+                          name="radio2" 
+                          value='Indoor'
+                          onChange={(e) => {
+                            setActivityToggle(e.target.value);
+                            console.log(e.target.value);
+                          }}/>Indoor
                       </Label>
                     </FormGroup>
                     <FormGroup check>
                       <Label check>
-                        <Input type="radio" name="radio2" /> Outdoor Acitivities
+                      <Input 
+                          type="radio" 
+                          name="radio2" 
+                          value='Outdoor'
+                          onChange={(e) => {
+                            setActivityToggle(e.target.value);
+                            console.log(e.target.value);
+                          }}/>Outdoor
                       </Label>
                     </FormGroup>
                     <FormGroup check disabled>
@@ -196,7 +233,11 @@ function BackendTemplatePage () {
                 </FormGroup>
                 <FormGroup check row>
                   <Col sm={{ size: 10, offset: 2 }}>
-                    <Button>Submit</Button>
+                    <Button
+                      onClick={(e) => {
+                      setSubmitted(true);
+                      }}
+                    >Submit</Button>
                   </Col>
                 </FormGroup>
               </Form>
