@@ -1,4 +1,4 @@
 id,city,country,attraction_id_list
-0,Austin,United States,"[0, 1]"
-1,Shanghai,China,"[4, 5]"
-2,Agra,India,"[2, 3]"
+0,Austin,United States,"[0, 1, 2]"
+1,Shanghai,China,"[5, 6]"
+2,Agra,India,"[3, 4]"
