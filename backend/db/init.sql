@@ -16,7 +16,7 @@ IGNORE 1 LINES
 
 
 CREATE TABLE IF NOT EXISTS aet_tickets.attractions(
-  id, SMALLINT(7),
+  id SMALLINT(7),
   `name` VARCHAR(50),
   price_low SMALLINT(7) UNSIGNED,
   price_high SMALLINT(7) UNSIGNED,
