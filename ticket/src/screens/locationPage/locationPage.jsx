@@ -1,18 +1,16 @@
-import React from 'react';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import Navbar2 from '../../components/navbar2/navbar2'
 import LocLogo from "../../assets/locationPage-pic.svg"
-import Dropdown from '../../components/dropdown/Dropdown'
+import Calendar from '../../components/calendar/Calendar'
+import EnjoyButton from '../../components/enjoyButton/EnjoyButton'
+import GoingOutButton from '../../components/goingOutButton/GoingOutButton'
+import TravelingWithButton from "../../components/travelingWithButton/TravelingWithButton"
 import { useLocation } from 'react-router-dom'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import {React, useState, useEffect} from 'react'
 
 import './locationPage.css'
 const LocationPage = () => {
   const {state} = useLocation(); //state is dictionary
   const [location, setLocation] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
   useEffect(() => {
     if(state?.location) {
       setLocation(state.location)
@@ -27,12 +25,22 @@ const LocationPage = () => {
       <div class = "row">
         <h1 class="location">{location}</h1> 
       </div>
-      <div class = "row">
-       <Dropdown/>
+      <div class="d-grid gap-3">
+        <div class = "row">
+        <Calendar/>
+        </div>
+        <div class = "row">
+        <EnjoyButton/>
+        </div>
+        <div class = "row">
+          <GoingOutButton/>
+        </div>
+        <div class = "row">
+          <TravelingWithButton/>
+        </div>
       </div>
-      <div>
-      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-      </div>
+      
+    
       <div class = "row">
        <img class = "loc_background" src= {LocLogo}/>
       </div>
