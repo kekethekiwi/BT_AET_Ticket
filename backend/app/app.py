@@ -295,7 +295,7 @@ def get_all_tables() -> str:
     get_attractions_filters(request_params)
     return json.dumps({'attractions': run_query('attractions', {})})
 
-@app.route('/locations')
+@app.route('/locations') # return a dictionary of ID : name
 def get_locations() -> str:
     return json.dumps({'locations': get_all('locations')})
 
