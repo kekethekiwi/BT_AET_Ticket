@@ -31,7 +31,7 @@ import {
     "date",
     "time_of_day"
  */
-
+//
 
 
 function BackendTemplatePage () {
@@ -54,12 +54,14 @@ function BackendTemplatePage () {
 	const [numPosts, setNumPosts] = useState(0);
 	const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
+  // builds filter query string 
+  useEffect(() => { // builds the query link
 		var query_string = '';
 		var multiple = false;
 		var add_q = false;
 		var filter_dict = {
-			activity_type : activityType
+			activity_type : activityType 
+      // add more filters here 
 		};
 		for (let filter in filter_dict) {
 			if (filter_dict[filter] !== '') {
@@ -76,17 +78,20 @@ function BackendTemplatePage () {
 			query_string = '?' + query_string;
 			setUseFilter(true);
 		}
+    // "?activity_type=Outdoor"
 		setFilterQuery(query_string);
-	}, [id, activityType]);
+	}, [id, activityType]); // duplicate for all filters 
   
   
+  // sets variables for query
   useEffect(() => {
     setSubmitted(false);
     setCid(idToggle);
     setActivityType(activityToggle);
+    // duplicate for other filters besides activity type
 	}, [submitted]);
 
-
+  // connects to backend 
   useEffect(() => {
 		const fetchPosts = async () => {
 			setLoaded(false);
@@ -126,23 +131,24 @@ function BackendTemplatePage () {
 		}
 	}, [id, filterQuery, useFilter]);
 
+
   // hardcoded for now
   const city_options = [
     {
-      value: -1,
-      label: "Select a location",
+      id: -1,
+      city_name: "Select a location",
     },
     {
-      value: 0,
-      label: "Austin, Texas, USA",
+      id: 0,
+      city_name: "Austin, Texas",
     },
     {
-      value: 1,
-      label: "Shanghai, China",
+      id: 1,
+      city_name: "Shanghai, China",
     },
     {
-      value: 2,
-      label: "Agra, UP, India",
+      id: 2,
+      city_name: "Agra, UP, India",
     },
   ]; // TODO: build a entrypoint in your backend to get this data dynamically
   return (
@@ -162,7 +168,16 @@ function BackendTemplatePage () {
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Label for="exampleDate">Date</Label>
+                  <Label for="exampleDate">Start Date</Label>
+                  <Input
+                    type="date"
+                    name="date"
+                    id="exampleDate"
+                    placeholder="date placeholder"
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="exampleDate">End Date</Label>
                   <Input
                     type="date"
                     name="date"
@@ -189,8 +204,8 @@ function BackendTemplatePage () {
                       console.log(e.target.value);
                     }}
                     >
-                    {city_options.map((option) => (
-                          <option value={option.value}>{option.label}</option>
+                    {city_options.map((city) => (
+                          <option value={city.id}>{city.city_name}</option>
                     ))}
                   </Input>
                 </FormGroup>
