@@ -2,7 +2,11 @@ import "./Calendar.scss";
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Date_Picker from '../date-picker/DatePicker'
+import {
+  Input,
+  Label
+} from 'reactstrap';
+
 function Calendar() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -20,7 +24,22 @@ function Calendar() {
           <Modal.Title>When are you going?</Modal.Title>
         </Modal.Header>
         <Modal.Body> 
-          <Date_Picker/>
+          <Label for="exampleDate">Start Date</Label>
+          <Input
+            type="date"
+            name="date"
+            id="exampleDate"
+            placeholder="date placeholder"
+          />
+
+          <Label for="exampleDate">End Date</Label>
+          <Input
+            type="date"
+            name="date"
+            id="exampleDate"
+            placeholder="date placeholder"
+          />
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleClose}>
