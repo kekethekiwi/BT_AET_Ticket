@@ -1,6 +1,13 @@
 import React, {useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import {
+  Col,
+  FormGroup,
+  FormText,
+  Input,
+  Label
+} from 'reactstrap';
 import './EnjoyButton.css'
 const EnjoyButton = () => {
     const [show, setShow] = useState(false);
@@ -18,61 +25,70 @@ const EnjoyButton = () => {
           <Modal.Title>I enjoy...</Modal.Title>
         </Modal.Header>
         <Modal.Body> 
-        <div class="form-group">
-          <select id="role" name="role" class="form-control">
-              <option value='1'>Planned Trips</option>
-              <option value='2'>Spontaneous Trips</option>
-          </select>
-        </div>
+          <FormGroup>
+            <FormText color = "muted">
+              Select Trip Type
+            </FormText>
+          </FormGroup>
+          <FormGroup>
+            <Col sm={10}>
+              <Input type="select" name="select">
+              <option>Planned Trips</option>
+              <option>Spontaneous</option>
+              </Input>
+            </Col>
+          </FormGroup>
 
+          <FormGroup check inline>
+            <Input type="checkbox"/>
+            {' '}
+            <Label check> being inside </Label>
+          </FormGroup>
+          <FormGroup check inline>
+            <Input type="checkbox"/>
+            {' '}
+            <Label check> being outside </Label>
+          </FormGroup>
 
-        <div class="form-group">
-          
-          <div class="form-check form-check-inline" >
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"></input>
-            <label class="form-check-label" for="inlineCheckbox1">being inside</label>
-          </div>
-          
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2"></input>
-            <label class="form-check-label" for="inlineCheckbox2">being outside</label>
-          </div>
-        </div>
-          
-      
-        <div class="form-group">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
-            <label class="form-check-label" for="flexCheckDefault">touristy</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
-            <label class="form-check-label" for="flexCheckDefault">secretive</label>
-          </div>
-        </div>
+       <br />
 
-        <div class="form-group">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
-            <label class="form-check-label" for="flexCheckDefault">shopping</label>
-          </div>
-          <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
-          <label class="form-check-label" for="flexCheckDefault">historic</label>
-          </div>
-        </div>
+          <FormGroup check inline>
+            <Input type="checkbox"/>
+            {' '}
+            <Label check> touristy </Label>
+          </FormGroup>
+          <FormGroup check inline>
+            <Input type="checkbox"/>
+            {' '}
+            <Label check> secretive </Label>
+          </FormGroup>
 
+      <br />
 
-        <div class="form-group">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
-            <label class="form-check-label" for="flexCheckDefault">culture</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
-            <label class="form-check-label" for="flexCheckDefault">romantic</label>
-          </div>
-        </div>
+          <FormGroup check inline>
+            <Input type="checkbox"/>
+            {' '}
+            <Label check> shopping </Label>
+          </FormGroup>
+          <FormGroup check inline>
+            <Input type="checkbox"/>
+            {' '}
+            <Label check> historic </Label>
+          </FormGroup>
+
+      <br />
+
+          <FormGroup check inline>
+            <Input type="checkbox"/>
+              {' '}
+              <Label check> culture </Label>
+            </FormGroup>
+            <FormGroup check inline>
+              <Input type="checkbox"/>
+              {' '}
+              <Label check> romantic </Label>
+          </FormGroup>
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleClose}>
