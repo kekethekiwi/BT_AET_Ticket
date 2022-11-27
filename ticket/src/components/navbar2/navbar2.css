@@ -14,8 +14,7 @@
 }
 
 .header {
-    width: auto;
-    margin: auto;
-    margin-right: -10px;
-    font-weight:normal;
-}
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
