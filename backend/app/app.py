@@ -297,6 +297,7 @@ def get_all_tables() -> str:
 
 @app.route('/locations') # return a dictionary of ID : name
 def get_locations() -> str:
+    city_options = {}
     return json.dumps({'locations': get_all('locations')})
 
 
