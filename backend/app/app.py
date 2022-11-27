@@ -31,6 +31,20 @@ def close_connection(cursor, connection):
 # Pass in either "locations" or "attractions" as the value
 # for our table argument
 def get_all(table):
+    connection, cursor = open_connection()
+    cursor.execute(f'SELECT * FROM {table}') # SQL QUERY (google)
+    
+    result = OrderedDict() # use an ordered dict so the order stays the same as we add each row
+    result["num_entries"] = 0  # add this first since to keep spot in OrderedDict
+    for row in cursor: 
+        result[row[0]] = row # add each row of the SQL Database result to our dictionary
+    result["num_entries"] = len(result) - 1 
+
+    close_connection(cursor, connection)
+
+    return result
+
+def get_cities(table):
     config = {
         'user': 'root',
         'password': 'root',
@@ -41,17 +55,27 @@ def get_all(table):
     connection = mysql.connector.connect(**config)
     cursor = connection.cursor()
     cursor.execute(f'SELECT * FROM {table}') # SQL QUERY (google)
-    result = OrderedDict() # use an ordered dict so the order stays the same as we add each row
-    result["num_entries"] = 0  # add this first since to keep spot in OrderedDict
-    for row in cursor: 
-        result[row[0]] = row # add each row of the SQL Database result to our dictionary
-    result["num_entries"] = len(result) - 1 
+    
+    # result = OrderedDict() # use an ordered dict so the order stays the same as we add each row
+    # result["num_entries"] = 0  # add this first since to keep spot in OrderedDict
+    # for row in cursor: 
+    #     result[row[0]] = row # add each row of the SQL Database result to our dictionary
+    # result["num_entries"] = len(result) - 1 
+
+    result = []
+    for count, row in enumerate(cursor):
+        city = {}
+        city[count] = row
+        result += city
+    # for each row (create a new dictionary (hard code the column) "dict[id] = 0")
+
+
     cursor.close()
     connection.close()
 
     return result
 
-# what is the query we are trying to build? 
+
 # SELECT * FROM {table} WHERE id IN {(3, 4, 5)} AND {params}
 
 def build_query_new(table, id_list, request_params):
@@ -293,12 +317,12 @@ def build_query(table, request_params) -> str:
 def get_all_tables() -> str:
     request_params = request.data
     get_attractions_filters(request_params)
-    return json.dumps({'attractions': run_query('attractions', {})})
+    return json.dumps({'attractions': run_query('attractions', request_params)})
 
 @app.route('/locations') # return a dictionary of ID : name
 def get_locations() -> str:
-    city_options = {}
-    return json.dumps({'locations': get_all('locations')})
+    city_options = []
+    return json.dumps({get_cities('locations')})
 
 
 @app.route('/location/<id>')
