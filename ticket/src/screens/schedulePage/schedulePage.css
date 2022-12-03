@@ -1,0 +1,49 @@
+.logoText {
+    margin-left: 110px !important;
+    margin-top: -40px !important;
+    margin-bottom: 30px !important;
+}
+
+.logo_pic {
+    margin-top: -5px !important;
+}
+
+.header1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+.header2 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+.scheduleEditor {
+    width: 400px;
+    height: 30px;
+}
+
+.schedule_pic {
+    width: 1000px;
+    height: 500px;
+}
+
+.labels {
+    color: black;
+    font-weight: bolder;
+    margin-bottom: -3px;
+}
+
+.buttons-flex {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.loc_background {
+    position: absolute;
+    bottom: -300px;
+}

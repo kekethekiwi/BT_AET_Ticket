@@ -9,9 +9,11 @@ import {
 
 function Calendar() {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  
   const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
+  
   return (
     <>
       <div class="d-grid gap-5">

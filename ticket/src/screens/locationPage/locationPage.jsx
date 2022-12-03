@@ -11,6 +11,8 @@ import './locationPage.css'
 const LocationPage = () => {
   const {state} = useLocation(); //state is dictionary
   const [location, setLocation] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     if(state?.location) {
@@ -19,7 +21,17 @@ const LocationPage = () => {
   })
   
   function handleSchedule() {
-    navigate("/schedule");
+    navigate("/schedule", {
+      state: {
+        location: location,
+        startDate: "11/9",
+        endDate: "11/12"
+    }
+  });
+  }
+
+  const handleCallback = (childData) =>{
+    this.setState({startDate: childData})
   }
   return (
     <div class = "container-fluid">
@@ -31,7 +43,7 @@ const LocationPage = () => {
       </div>
       <div class="d-grid gap-3">
         <div class = "row">
-        <Calendar/>
+        <Calendar parentCallback = {handleCallback}/>
         </div>
         <div class = "row">
         <EnjoyButton/>
@@ -55,7 +67,7 @@ const LocationPage = () => {
 
 
       <div class = "row">
-       <img class = "loc_background" src= {LocLogo}/>
+       <img class = "loc_background_1" src= {LocLogo}/>
       </div>
       
       
